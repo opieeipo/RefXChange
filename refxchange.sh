@@ -161,7 +161,9 @@ main() {
         || die $EX_BACKEND "$(_ "no back end can convert") $from_fmt -> $to_fmt"
     require_backend "$backend" || die $EX_BACKEND "$(_ "back end not found:") $backend"
 
-    trace "backend=$backend from=$from_fmt to=$to_fmt encoding=$encoding batch=$batch"
+    trace "backend=$backend from=$from_fmt to=$to_fmt encoding=$encoding" \
+          "batch=$batch force=$force keys=${keys:-none} output=${output:-stdout}"
+    info "$(_ "converting:") $from_fmt -> $to_fmt"
 
     # TODO: dispatch to the back end (single-file, batch, and stdin paths).
     die $EX_CONVERT "$(_ "conversion is not implemented yet")"

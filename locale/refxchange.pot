@@ -139,3 +139,7 @@ msgstr ""
 #: refxchange.sh
 msgid "conversion is not implemented yet"
 msgstr ""
+
+#: refxchange.sh
+msgid "converting:"
+msgstr ""

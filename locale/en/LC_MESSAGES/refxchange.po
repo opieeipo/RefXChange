@@ -134,3 +134,7 @@ msgstr "back end not found:"
 #: refxchange.sh
 msgid "conversion is not implemented yet"
 msgstr "conversion is not implemented yet"
+
+#: refxchange.sh
+msgid "converting:"
+msgstr "converting:"
