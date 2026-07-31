@@ -1,0 +1,136 @@
+# English (source language) catalog for RefXChange.
+msgid ""
+msgstr ""
+"Project-Id-Version: refxchange 0.1.0\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+
+#: refxchange.sh
+msgid "RefXChange"
+msgstr "RefXChange"
+
+#: refxchange.sh
+msgid "convert bibliographic reference files"
+msgstr "convert bibliographic reference files"
+
+#: refxchange.sh
+msgid "Usage:"
+msgstr "Usage:"
+
+#: refxchange.sh
+msgid "Formats:"
+msgstr "Formats:"
+
+#: refxchange.sh
+msgid "Source format (auto-detected from the extension if omitted)"
+msgstr "Source format (auto-detected from the extension if omitted)"
+
+#: refxchange.sh
+msgid "Target format (required)"
+msgstr "Target format (required)"
+
+#: refxchange.sh
+msgid "Input file, directory, or - for stdin (required)"
+msgstr "Input file, directory, or - for stdin (required)"
+
+#: refxchange.sh
+msgid "Output file or directory (default: stdout)"
+msgstr "Output file or directory (default: stdout)"
+
+#: refxchange.sh
+msgid "Treat --input as a directory/glob"
+msgstr "Treat --input as a directory/glob"
+
+#: refxchange.sh
+msgid "Character encoding for I/O (default: utf-8)"
+msgstr "Character encoding for I/O (default: utf-8)"
+
+#: refxchange.sh
+msgid "Normalize BibTeX citation keys (e.g. author_year)"
+msgstr "Normalize BibTeX citation keys (e.g. author_year)"
+
+#: refxchange.sh
+msgid "Overwrite existing output files without prompting"
+msgstr "Overwrite existing output files without prompting"
+
+#: refxchange.sh
+msgid "Suppress progress output"
+msgstr "Suppress progress output"
+
+#: refxchange.sh
+msgid "Print each back-end command as it runs"
+msgstr "Print each back-end command as it runs"
+
+#: refxchange.sh
+msgid "Print version and exit"
+msgstr "Print version and exit"
+
+#: refxchange.sh
+msgid "Show this help and exit"
+msgstr "Show this help and exit"
+
+#: refxchange.sh
+msgid "--from requires a value"
+msgstr "--from requires a value"
+
+#: refxchange.sh
+msgid "--to requires a value"
+msgstr "--to requires a value"
+
+#: refxchange.sh
+msgid "--input requires a value"
+msgstr "--input requires a value"
+
+#: refxchange.sh
+msgid "--output requires a value"
+msgstr "--output requires a value"
+
+#: refxchange.sh
+msgid "--encoding requires a value"
+msgstr "--encoding requires a value"
+
+#: refxchange.sh
+msgid "--keys requires a value"
+msgstr "--keys requires a value"
+
+#: refxchange.sh
+msgid "unknown option:"
+msgstr "unknown option:"
+
+#: refxchange.sh
+msgid "--to is required"
+msgstr "--to is required"
+
+#: refxchange.sh
+msgid "--input is required"
+msgstr "--input is required"
+
+#: refxchange.sh
+msgid "--from is required when reading from stdin"
+msgstr "--from is required when reading from stdin"
+
+#: refxchange.sh
+msgid "could not auto-detect the input format; pass --from"
+msgstr "could not auto-detect the input format; pass --from"
+
+#: refxchange.sh
+msgid "unsupported format:"
+msgstr "unsupported format:"
+
+#: refxchange.sh
+msgid "input not found or unreadable:"
+msgstr "input not found or unreadable:"
+
+#: refxchange.sh
+msgid "no back end can convert"
+msgstr "no back end can convert"
+
+#: refxchange.sh
+msgid "back end not found:"
+msgstr "back end not found:"
+
+#: refxchange.sh
+msgid "conversion is not implemented yet"
+msgstr "conversion is not implemented yet"

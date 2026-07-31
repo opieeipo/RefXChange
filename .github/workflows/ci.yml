@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  shellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install shellcheck
+        run: sudo apt-get update && sudo apt-get install -y shellcheck
+      - name: Lint
+        run: shellcheck refxchange.sh lib/*.sh tests/*.sh
+
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install back ends (Linux)
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y bibutils pandoc gettext
+      - name: Install back ends (macOS)
+        if: runner.os == 'macOS'
+        run: brew install bash bibutils pandoc gettext
+      # Windows runs under Git Bash; back ends are optional there for now, the
+      # smoke tests only exercise argument handling.
+      - name: Run smoke tests
+        run: bash tests/run_tests.sh

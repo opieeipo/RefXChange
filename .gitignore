@@ -1,0 +1,20 @@
+# Compiled gettext catalogs (built from the .po sources)
+*.mo
+
+# Test scratch output
+tests/tmp/
+*.out
+
+# Environment / secrets
+.env
+.env.*
+!.env.example
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# OS cruft
+.DS_Store
+Thumbs.db
