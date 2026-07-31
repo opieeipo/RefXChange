@@ -8,9 +8,46 @@
 set -uo pipefail
 
 REFXCHANGE_VERSION="0.1.0"
+readonly REFXCHANGE_VERSION
 
-REFXCHANGE_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
-readonly REFXCHANGE_ROOT REFXCHANGE_VERSION
+# Resolve this script's real directory, following symlinks. `readlink -f` isn't
+# portable (macOS ships the BSD one), so walk the chain by hand.
+_rx_self="${BASH_SOURCE[0]}"
+while [[ -L $_rx_self ]]; do
+    _rx_dir="$(cd -- "$(dirname -- "$_rx_self")" && pwd)"
+    _rx_self="$(readlink "$_rx_self")"
+    [[ $_rx_self != /* ]] && _rx_self="$_rx_dir/$_rx_self"
+done
+_rx_bin_dir="$(cd -- "$(dirname -- "$_rx_self")" && pwd)"
+
+# Find the tree holding lib/ and locale/. In a checkout that's alongside the
+# script; once installed, the script lives in <prefix>/bin and the rest in
+# <prefix>/share/refxchange. REFXCHANGE_ROOT in the environment wins.
+_rx_find_root() {
+    local candidate
+    for candidate in \
+        ${REFXCHANGE_ROOT-} \
+        "$_rx_bin_dir" \
+        "$_rx_bin_dir/../share/refxchange" \
+        "${XDG_DATA_HOME:-$HOME/.local/share}/refxchange" \
+        "/usr/local/share/refxchange" \
+        "/usr/share/refxchange"
+    do
+        if [[ -r "$candidate/lib/formats.sh" ]]; then
+            (cd -- "$candidate" && pwd)
+            return 0
+        fi
+    done
+    return 1
+}
+
+if ! REFXCHANGE_ROOT="$(_rx_find_root)"; then
+    printf 'error: cannot locate the RefXChange lib/ directory\n' >&2
+    printf 'hint: reinstall, or set REFXCHANGE_ROOT to the checkout\n' >&2
+    exit 3
+fi
+readonly REFXCHANGE_ROOT
+unset _rx_self _rx_dir _rx_bin_dir
 
 # shellcheck source=lib/i18n.sh
 source "$REFXCHANGE_ROOT/lib/i18n.sh"

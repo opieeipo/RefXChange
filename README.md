@@ -32,26 +32,85 @@ on your `PATH`:
 | [`bibutils`](https://sourceforge.net/p/bibutils/) | RIS, NBIB, BibTeX, EndNote, MODS, Word | `apt install bibutils` / `brew install bibutils` |
 | [`pandoc`](https://pandoc.org/) | BibTeX ↔ CSL-JSON ↔ BibLaTeX | `apt install pandoc` / `brew install pandoc` |
 
-RefXChange itself needs **Bash 4+** and standard POSIX utilities (`sed`, `awk`,
-`grep`).
+RefXChange itself needs **Bash 3.2+** (the stock macOS bash is fine) and
+standard POSIX utilities (`sed`, `awk`, `grep`, `tr`). On Windows it runs under
+Git Bash or WSL. `gettext` is optional — without it, messages stay in English.
 
 ---
 
 ## Installation
 
-```bash
-# Clone or download, then make it executable
-chmod +x refxchange.sh
+Clone the repo and run the installer for your platform. Both install into a
+**user-local prefix** — no `sudo`, nothing written outside your home directory.
 
-# (Optional) put it on your PATH for global use
-sudo cp refxchange.sh /usr/local/bin/refxchange
+### macOS / Linux / WSL / Git Bash
+
+```bash
+git clone https://github.com/opieeipo/RefXChange.git
+cd RefXChange
+./install.sh          # or: make install
 ```
 
-Verify the install:
+This lays down:
+
+| Path | Contents |
+|------|----------|
+| `~/.local/bin/refxchange` | the executable |
+| `~/.local/share/refxchange/lib/` | sourced helper modules |
+| `~/.local/share/refxchange/locale/` | message catalogs (compiled to `.mo` when `msgfmt` is available) |
+
+If `~/.local/bin` isn't on your `PATH`, the installer prints the exact line to
+add for your shell. Override the prefix with `--prefix` (or `PREFIX=`):
+
+```bash
+./install.sh --prefix /usr/local     # system-wide; needs write access
+make install PREFIX=/opt/refxchange
+```
+
+### Windows (PowerShell)
+
+RefXChange is a Bash program, so Windows needs [Git for
+Windows](https://git-scm.com/download/win) (Git Bash) or WSL. The installer
+finds one, then installs a `refxchange.cmd` shim and puts it on your user
+`PATH`:
+
+```powershell
+git clone https://github.com/opieeipo/RefXChange.git
+cd RefXChange
+.\install.ps1                        # -> %LOCALAPPDATA%\Programs\RefXChange
+.\install.ps1 -Prefix D:\Tools\RefXChange
+```
+
+Open a new terminal afterwards so the `PATH` change takes effect.
+
+### Verify
 
 ```bash
 refxchange --version
 ```
+
+### Development installs
+
+`--link` symlinks the command at your checkout instead of copying, so edits take
+effect immediately:
+
+```bash
+./install.sh --link        # or: make link
+```
+
+### Uninstall
+
+```bash
+./install.sh --uninstall   # or: make uninstall
+```
+
+```powershell
+.\install.ps1 -Uninstall
+```
+
+The command locates its own `lib/` and `locale/` relative to itself (following
+symlinks), falling back to `~/.local/share/refxchange` and `/usr/local/share/refxchange`.
+Set `REFXCHANGE_ROOT` to point it at a specific tree if you need to override that.
 
 ---
 
